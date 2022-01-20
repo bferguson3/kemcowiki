@@ -18,10 +18,18 @@ namespace api.Controllers
             _gameService = gameService;
         }
 
-        [HttpGet(Name = "GetGames")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             var result = await _gameService.GetAllGames();
+            return Ok(result);
+        }
+
+
+        [HttpGet("{gameId}")]
+        public async Task<IActionResult> GetSingle(string gameId)
+        {
+            var result = await _gameService.GetSingleGame(gameId);
             return Ok(result);
         }
     }
