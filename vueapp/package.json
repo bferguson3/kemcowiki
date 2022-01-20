@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "axios": "^0.25.0",
+    "bulma": "^0.9.3",
     "core-js": "^3.6.5",
+    "node-sass": "^6",
+    "sass-loader": "^10",
     "vue": "^2.6.11"
   },
   "devDependencies": {
