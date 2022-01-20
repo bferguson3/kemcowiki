@@ -13,7 +13,7 @@ namespace api.Models
         public DateTime? YearsActiveStart { get; set; }
         public DateTime? YearsActiveEnd { get; set; }
 
-        public Game[]? GamesCreated { get; set; }
+        public List<Game> GamesCreated { get; set; } = new List<Game>();
         
     }
 }
