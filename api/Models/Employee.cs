@@ -9,6 +9,6 @@ namespace api.Models
 
         public Developer? WorksFor { get; set; }
 
-        public Game[]? GamesWorkedOn { get; set; }
+        public List<Game> GamesCreated { get; set; } = new List<Game>();
     }
 }
