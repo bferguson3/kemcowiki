@@ -11,7 +11,7 @@ using Microsoft.Azure.Cosmos;
 public class Program
 {
     private static readonly string EndpointUri = "https://kemcowiki.documents.azure.com:443/";
-    private static readonly string PrimaryKey = "Djzi8gg6W4zjUq4XLua2RGTlCBcjb7TEXTajCYTThPdAwbFVsSHz0o2NwFaOPzdG29b99iaDfE5qQ2kWMd0ncA==";
+    private static readonly string PrimaryReadOnlyKey = "sJ8scLbCX0hi5yswpqM1cMjbGQK1Yasg5f4aWVV1TtNza2c22x8CrYsPFo0x20aAqLxucLBZyuG3cF3kMBjN1A==";
     private CosmosClient cosmosClient;
     private Database database;
     private Container container;
@@ -70,7 +70,7 @@ public class Program
 
     public async Task GetStartedDemoAsync()
     {
-        this.cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
+        this.cosmosClient = new CosmosClient(EndpointUri, PrimaryReadOnlyKey);
         await this.CreateDatabaseAsync();
         await this.CreateContainerAsync();
         // additemstocontainerasync if needed
