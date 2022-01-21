@@ -1,26 +1,28 @@
 <template> 
-    <h3> Users:</h3>
+<div class="columns is-mobile">
+  <div class="column is-1">
+      <div class="box" style="height: 1024px" align="left">[X]</div>
+  </div>
+  <div class="column is-11">
+      <button class="button" @click="test">Get Games List</button>
+  </div>
+</div>
 </template>
 
 <script> 
     import axios from "axios";
 
-    let endpoint = 'https://jsonplaceholder.typicode.com/users';
+    let endpoint = 'https://localhost:7128/Game';
 
     export default { 
         name: "Users",
-        data() 
-        { 
-            let o = { users: null };
-            return o;
-        },
-        created: function() {
-            axios
+        methods: {
+            test() {
+                axios
                 .get(endpoint)
-                .then(response => {
-                        this.users = response.data;
-                    }
-                )
+                .then(function(r){ alert(r); })
+                .catch(function(err){ alert(err); });
+            }
         }
     }
 </script> 

@@ -22,6 +22,17 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var NativeOrigin = "_nativeOrigin";
+        builder.Services.AddCors(options=>
+        {
+            options.AddPolicy(name: NativeOrigin,
+            builder=>{
+                builder.WithOrigins("*")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+            });
+        });
+
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -39,10 +50,12 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
+        app.UseRouting();
+        app.UseCors(NativeOrigin);
         app.UseAuthorization();
 
         app.MapControllers();
+        
         //////// CosmosDB test
         try
         {
