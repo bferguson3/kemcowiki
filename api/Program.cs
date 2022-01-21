@@ -12,7 +12,7 @@ public class Program
 {
     private static readonly string EndpointUri = "https://kemcowiki.documents.azure.com:443/";
     private static readonly string PrimaryReadOnlyKey = "sJ8scLbCX0hi5yswpqM1cMjbGQK1Yasg5f4aWVV1TtNza2c22x8CrYsPFo0x20aAqLxucLBZyuG3cF3kMBjN1A==";
-    private CosmosClient cosmosClient;
+    private CosmosClient? cosmosClient;
     private Database database;
     private Container container;
     private string databaseId = "kemcogames";

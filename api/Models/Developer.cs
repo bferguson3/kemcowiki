@@ -8,12 +8,12 @@ namespace api.Models
         public string Name { get; set; } = string.Empty;
         public string? RomanizedName { get; set; } = string.Empty;
 
-        public Employee[]? Credits { get; set; }
+        public List<Employee>? Employees { get; set; }
 
         public DateTime? YearsActiveStart { get; set; }
         public DateTime? YearsActiveEnd { get; set; }
 
-        public List<Game> GamesCreated { get; set; } = new List<Game>();
+        public List<Game> GamesList { get; set; } = new List<Game>();
         
     }
 }

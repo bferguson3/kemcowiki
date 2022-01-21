@@ -25,21 +25,21 @@ namespace api.Services
             {
                 Id = "asdivine-saga",
                 Title = "Asdivine Saga",
-                OriginalReleaseDate = new DateTime(2021, 9, 30),
+                //OriginalReleaseDate = new DateTime(2021, 9, 30),
                 AveragePlayLength = new TimeSpan(7, 30, 0)
             },
             new Game
             {
                 Id = "ruinverse",
                 Title = "Ruinverse",
-                OriginalReleaseDate = new DateTime(2019, 11, 26),
+                //OriginalReleaseDate = new DateTime(2019, 11, 26),
                 AveragePlayLength = new TimeSpan(10, 15, 0)
             },
             new Game
             {
                 Id = "yodanji",
                 Title = "Yodanji",
-                OriginalReleaseDate = new DateTime(2017, 12, 7),
+                //OriginalReleaseDate = new DateTime(2017, 12, 7),
                 AveragePlayLength = new TimeSpan(4, 45, 0)
             },
         };
