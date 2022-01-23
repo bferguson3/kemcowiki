@@ -20,8 +20,14 @@
             test() {
                 axios
                 .get(endpoint)
-                .then(function(r){ alert(r); })
-                .catch(function(err){ alert(err); });
+                .then(function(resp)
+                { 
+                    console.log(resp); 
+                })
+                .catch(function(err)
+                { 
+                    alert(err); 
+                });
             }
         }
     }

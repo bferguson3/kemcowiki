@@ -1,13 +1,15 @@
 using api.Interfaces;
 using api.Models;
+using static Program;
+using Microsoft.Azure.Cosmos;
 
 namespace api.Services
 {
     public class GameService : IGameService
     {
         public async Task<List<Game>> GetAllGames()
-        {
-            return await Task.FromResult(GameList);
+        {   
+            return await TestAsync();
         }
 
         public async Task<Game?> GetSingleGame(string gameId)
@@ -18,6 +20,58 @@ namespace api.Services
             return await Task.FromResult(matchingGame);
         }
 
+        public async Task<List<Game>> TestAsync()
+        {
+            db.containerId = "games";
+            db.partitionKey = "/games";
+            QueryDefinition q = await db.TestQueryAsync();
+            //PrintQuery(q);
+            FeedIterator<Game> queryResultsIter = db.container.GetItemQueryIterator<Game>(q);
+            List<Game> rs = new List<Game>();
+            while(queryResultsIter.HasMoreResults)
+            {
+                FeedResponse<Game> curResSet = await queryResultsIter.ReadNextAsync();
+                foreach (Game r in curResSet)
+                    rs.Add(r);
+            }
+            return rs;
+        }
+        
+        private async Task PrintQuery(QueryDefinition queryDefinition)
+        {
+            /* Only for debugging 
+            FeedIterator<Game> queryResultSetIterator = this.container.GetItemQueryIterator<Game>(queryDefinition);
+            List<Game> games = new List<Game>();
+            while (queryResultSetIterator.HasMoreResults)
+            {
+                FeedResponse<Game> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+                foreach (Game Game in currentResultSet)
+                {
+                    games.Add(Game);
+                    Console.WriteLine("\tFound game {0}\n", Game.Id);
+                }
+            }
+            */
+            int modelType = 0;
+            switch(modelType)
+            {
+                case 0:
+                    Console.WriteLine("Query type: Releases");
+                    FeedIterator<Release> queryResultSetIterator = db.container.GetItemQueryIterator<Release>(queryDefinition);
+                    List<Release> objects = new List<Release>();
+                    while (queryResultSetIterator.HasMoreResults)
+                    {
+                        FeedResponse<Release> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+                        foreach (Release r in currentResultSet)
+                        {
+                            objects.Add(r);
+                            Console.WriteLine("Found release Id: {0}\nRomanizedName: {1}\n\n", r.Id, r.RomanizedName);
+                        }
+                    }
+                    break;
+            }
+        }
+        
         // replace this with a db call or some other data access
         private List<Game> GameList => new List<Game>
         {
