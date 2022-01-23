@@ -25,12 +25,6 @@ namespace api.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _gameService.GetAllGames();
-            //var jsonresult = JsonSerializer.Serialize(result, typeof(List<Game>));
-            //var strcontent = new StringContent(jsonresult);
-            //var response = new HttpRequestMessage();//HttpMethod.Head, "");
-            //response.Content = strcontent;
-            //response.Headers.Add("access-control-allow-origin", "*");
-            //response.Headers.Add("Access-Control-Allow-Methods", "GET");
             return Ok(result);
         }
 

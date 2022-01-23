@@ -14,17 +14,19 @@ public class DBService
     public string containerId = "releases";
     public string partitionKey = "/releases";
 
-    public async Task GetStartedDemoAsync()
+    public async Task<QueryDefinition> TestQueryAsync()
     {
+        QueryDefinition? q = new QueryDefinition("{}");
         try {
             this.cosmosClient = new CosmosClient(EndpointUri, PrimaryReadOnlyKey);
             await this.CreateDatabaseAsync(databaseId);
             await this.CreateContainerAsync(containerId, partitionKey);
             // additemstocontainerasync if needed
 
-            QueryDefinition q = await this.QueryItemsAsync("SELECT * FROM c");
-
-            PrintQuery(q);
+            String queryString = String.Format("SELECT * FROM {0}", containerId);
+            q = await this.QueryItemsAsync(queryString);
+            
+            return q;
 
         } catch (CosmosException de) {
             Exception baseException = de.GetBaseException();
@@ -32,7 +34,7 @@ public class DBService
         } catch (Exception e) {
             Console.WriteLine("Error: {0}", e);
         }
-
+        return q;
     }
 
     private async Task CreateDatabaseAsync(string databaseName)
@@ -54,39 +56,6 @@ public class DBService
         return new QueryDefinition(sqlQueryText);
     }
 
-    private async Task PrintQuery(QueryDefinition queryDefinition)
-    {
-        /* Only for debugging 
-        FeedIterator<Game> queryResultSetIterator = this.container.GetItemQueryIterator<Game>(queryDefinition);
-        List<Game> games = new List<Game>();
-        while (queryResultSetIterator.HasMoreResults)
-        {
-            FeedResponse<Game> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-            foreach (Game Game in currentResultSet)
-            {
-                games.Add(Game);
-                Console.WriteLine("\tFound game {0}\n", Game.Id);
-            }
-        }
-        */
-        int modelType = 0;
-        switch(modelType)
-        {
-            case 0:
-                Console.WriteLine("Query type: Releases");
-                FeedIterator<Release> queryResultSetIterator = this.container.GetItemQueryIterator<Release>(queryDefinition);
-                List<Release> objects = new List<Release>();
-                while (queryResultSetIterator.HasMoreResults)
-                {
-                    FeedResponse<Release> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-                    foreach (Release r in currentResultSet)
-                    {
-                        objects.Add(r);
-                        Console.WriteLine("Found release Id: {0}\nRomanizedName: {1}\n\n", r.Id, r.RomanizedName);
-                    }
-                }
-                break;
-        }
-    }
+    
 }
 

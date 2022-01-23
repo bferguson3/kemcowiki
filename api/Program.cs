@@ -50,7 +50,7 @@ public class Program
         app.MapControllers();
         
         db = new DBService();
-        db.GetStartedDemoAsync();
+        //db.GetStartedDemoAsync();
 
         app.Run();
     }
