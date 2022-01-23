@@ -11,17 +11,21 @@ public class DBService
     public Database database;
     public Container container;
     public string databaseId = "kemcogames";
-    public string containerId = "container1";
+    public string containerId = "releases";
+    public string partitionKey = "/releases";
 
     public async Task GetStartedDemoAsync()
     {
         try {
-            Console.WriteLine("bish");
             this.cosmosClient = new CosmosClient(EndpointUri, PrimaryReadOnlyKey);
-            await this.CreateDatabaseAsync();
-            await this.CreateContainerAsync();
+            await this.CreateDatabaseAsync(databaseId);
+            await this.CreateContainerAsync(containerId, partitionKey);
             // additemstocontainerasync if needed
-            await this.QueryItemsAsync();
+
+            QueryDefinition q = await this.QueryItemsAsync("SELECT * FROM c");
+
+            PrintQuery(q);
+
         } catch (CosmosException de) {
             Exception baseException = de.GetBaseException();
             Console.WriteLine("{0} error occurred: {1}", de.StatusCode, de);
@@ -31,32 +35,30 @@ public class DBService
 
     }
 
-    private async Task CreateDatabaseAsync()
+    private async Task CreateDatabaseAsync(string databaseName)
     {
-        // Create a new database
-        this.database = await this.cosmosClient.CreateDatabaseIfNotExistsAsync(databaseId);
+        this.database = await this.cosmosClient.CreateDatabaseIfNotExistsAsync(databaseName);
         Console.WriteLine("Created Database: {0}\n", this.database.Id);
     }
 
-    private async Task CreateContainerAsync()
+    private async Task CreateContainerAsync(string containerName, string partitionName)
     {
-        // Create a new container
-        //FIXME : Don't know what the argument here is for
-        this.container = await this.database.CreateContainerIfNotExistsAsync(containerId, "/games");
+        this.container = await this.database.CreateContainerIfNotExistsAsync(containerName, partitionName);
         Console.WriteLine("Created Container: {0}\n", this.container.Id);
     }
 
-    private async Task QueryItemsAsync()
+    private async Task<QueryDefinition> QueryItemsAsync(string sqlQueryText)
     {
-        // test query
-        var sqlQueryText = "SELECT * FROM c";
         Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
-        QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+        return new QueryDefinition(sqlQueryText);
+    }
+
+    private async Task PrintQuery(QueryDefinition queryDefinition)
+    {
+        /* Only for debugging 
         FeedIterator<Game> queryResultSetIterator = this.container.GetItemQueryIterator<Game>(queryDefinition);
-
         List<Game> games = new List<Game>();
-
         while (queryResultSetIterator.HasMoreResults)
         {
             FeedResponse<Game> currentResultSet = await queryResultSetIterator.ReadNextAsync();
@@ -65,6 +67,25 @@ public class DBService
                 games.Add(Game);
                 Console.WriteLine("\tFound game {0}\n", Game.Id);
             }
+        }
+        */
+        int modelType = 0;
+        switch(modelType)
+        {
+            case 0:
+                Console.WriteLine("Query type: Releases");
+                FeedIterator<Release> queryResultSetIterator = this.container.GetItemQueryIterator<Release>(queryDefinition);
+                List<Release> objects = new List<Release>();
+                while (queryResultSetIterator.HasMoreResults)
+                {
+                    FeedResponse<Release> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+                    foreach (Release r in currentResultSet)
+                    {
+                        objects.Add(r);
+                        Console.WriteLine("Found release Id: {0}\nRomanizedName: {1}\n\n", r.Id, r.RomanizedName);
+                    }
+                }
+                break;
         }
     }
 }
