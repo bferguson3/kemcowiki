@@ -13,6 +13,7 @@ public class DBService
     public string databaseId = "kemcogames";
     public string containerId = "releases";
     public string partitionKey = "/releases";
+    public string selectKey = "*";
 
     public async Task<QueryDefinition> TestQueryAsync()
     {
@@ -23,7 +24,7 @@ public class DBService
             await this.CreateContainerAsync(containerId, partitionKey);
             // additemstocontainerasync if needed
 
-            String queryString = String.Format("SELECT * FROM {0}", containerId);
+            String queryString = String.Format("SELECT {0} FROM {1}", selectKey, containerId);
             q = await this.QueryItemsAsync(queryString);
             
             return q;

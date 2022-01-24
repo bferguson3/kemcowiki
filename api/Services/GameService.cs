@@ -9,21 +9,23 @@ namespace api.Services
     {
         public async Task<List<Game>> GetAllGames()
         {   
-            return await TestAsync();
+            return await TestAsync("*");
         }
 
         public async Task<Game?> GetSingleGame(string gameId)
         {
-            var matchingGame = GameList
-                .FirstOrDefault(g => g.Id.Equals(gameId, StringComparison.InvariantCultureIgnoreCase));
+            //var matchingGame = GameList
+            //    .FirstOrDefault(g => g.Id.Equals(gameId, StringComparison.InvariantCultureIgnoreCase));
 
-            return await Task.FromResult(matchingGame);
+            //return await Task.FromResult(matchingGame);
+            return await TestAsyncSingle("0001");
         }
 
-        public async Task<List<Game>> TestAsync()
+        public async Task<List<Game>> TestAsync(string sel)
         {
             db.containerId = "games";
             db.partitionKey = "/games";
+            db.selectKey = sel;
             QueryDefinition q = await db.TestQueryAsync();
             //PrintQuery(q);
             FeedIterator<Game> queryResultsIter = db.container.GetItemQueryIterator<Game>(q);
@@ -35,6 +37,24 @@ namespace api.Services
                     rs.Add(r);
             }
             return rs;
+        }
+
+        public async Task<Game?> TestAsyncSingle(string sel)
+        {
+            db.containerId = "games";
+            db.partitionKey = "/games";
+            db.selectKey = sel;
+            QueryDefinition q = await db.TestQueryAsync();
+            //PrintQuery(q);
+            FeedIterator<Game> queryResultsIter = db.container.GetItemQueryIterator<Game>(q);
+            Game r = new Game();
+            while(queryResultsIter.HasMoreResults)
+            {
+                FeedResponse<Game> curResSet = await queryResultsIter.ReadNextAsync();
+                foreach (Game g in curResSet)
+                    r = g;
+            }
+            return r;
         }
         
         private async Task PrintQuery(QueryDefinition queryDefinition)
