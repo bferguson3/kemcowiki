@@ -7,7 +7,7 @@
 <script>
 import Users from './components/Users.vue'
 
-require("./new.scss");
+//require("./new.scss");
 
 export default {
   name: 'App',
