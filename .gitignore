@@ -1,3 +1,6 @@
 vueapp/node_modules/
 api/bin/**
 api/obj/**
+genguid
+genmd5
+
