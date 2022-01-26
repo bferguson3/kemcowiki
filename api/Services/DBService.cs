@@ -3,7 +3,9 @@ using api.Interfaces;
 using api.Services;
 using api.Models;
 
-public class DBService
+namespace api.Services
+{
+public class DBService : IDbService
 {
     public static readonly string EndpointUri = "https://kemcowiki.documents.azure.com:443/";
     public static readonly string PrimaryReadOnlyKey = "sJ8scLbCX0hi5yswpqM1cMjbGQK1Yasg5f4aWVV1TtNza2c22x8CrYsPFo0x20aAqLxucLBZyuG3cF3kMBjN1A==";
@@ -56,7 +58,5 @@ public class DBService
 
         return new QueryDefinition(sqlQueryText);
     }
-
-    
+ }
 }
-
