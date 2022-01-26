@@ -1,7 +1,9 @@
 
+using api.Interfaces;
+
 namespace api.Models
 {
-    public class Developer
+    public class Developer : IDataModel
     {
         public string Id { get; set; } = string.Empty;
 

@@ -11,20 +11,20 @@ namespace api.Controllers
     public class GameController : ControllerBase
     {
         private readonly ILogger<GameController> _logger;
-        private readonly IGameService _gameService;
+        private readonly IDataService _dataService;
 
         public GameController(
             ILogger<GameController> logger,
-            IGameService gameService)
+            IDataService dataService)
         {
             _logger = logger;
-            _gameService = gameService;
+            _dataService = dataService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _gameService.GetAllGames();
+            var result = await _dataService.GetAll<Game>();
             return Ok(result);
         }
 
@@ -32,7 +32,7 @@ namespace api.Controllers
         [HttpGet("{gameId}")]
         public async Task<IActionResult> GetSingle(string gameId)
         {
-            var result = await _gameService.GetSingleGame(gameId);
+            var result = await _dataService.GetSingle<Game>(gameId);
             return Ok(result);
         }
     }

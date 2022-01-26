@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Net;
+using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Fluent;
+using api.Settings;
 
 public class Program
 {
-    public static DBService? db;
+    //todo: put these in a config file
+    private static readonly string EndpointUri = "https://kemcowiki.documents.azure.com:443/";
+    private static readonly string PrimaryReadOnlyKey = "sJ8scLbCX0hi5yswpqM1cMjbGQK1Yasg5f4aWVV1TtNza2c22x8CrYsPFo0x20aAqLxucLBZyuG3cF3kMBjN1A==";
+    private const string databaseId = "kemcogames";
+    private const string containerId = "container1";
 
-    public static async Task Main(string[] args)
+    
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -31,11 +39,35 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddScoped<IGameService, GameService>();
+        builder.Services.AddSingleton<IApiSettings>(s => 
+        {
+            var settings = new ApiSettings
+            {
+                DatabaseName = databaseId
+            };
+
+            return settings;
+        });
+
+        builder.Services.AddSingleton<CosmosClient>(s => 
+        {
+            var serializerOptions = new CosmosSerializationOptions
+            {
+                PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
+            };
+
+            var cosmosBuilder = new CosmosClientBuilder(
+                    EndpointUri,
+                    PrimaryReadOnlyKey)
+                .WithSerializerOptions(serializerOptions);
+
+            return cosmosBuilder.Build();
+        });
+
+        builder.Services.AddSingleton<IDataService, DataService>();
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -49,11 +81,6 @@ public class Program
 
         app.MapControllers();
         
-        db = new DBService();
-        //db.GetStartedDemoAsync();
-
         app.Run();
     }
-
-    
 }
