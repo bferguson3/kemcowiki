@@ -60,24 +60,29 @@ namespace api.Services
         public async Task<T?> GetSingle<T>(string id)
             where T: IDataModel
         {
-
             var container = await GetDbContainer<T>();
 
             var query = container.GetItemLinqQueryable<T>();
-            
-            //this does not work
-            var iterator = query
+
+            using (var iterator = query
                 .Where(q => q.Id == id)
-                .ToFeedIterator();
-
-            T? result = default(T);
-
-            if (iterator.HasMoreResults)
+                .ToFeedIterator())
             {
-                result = (await iterator.ReadNextAsync()).FirstOrDefault();
-            }
+                var results = new List<T>();
 
-            return result;
+                while (iterator.HasMoreResults)
+                {
+                    foreach (var item in await iterator.ReadNextAsync())
+                    {
+                        results.Add(item);
+                    }
+                    
+                }
+
+                var result =  results.FirstOrDefault();
+
+                return result;
+            }
         }
     }
 }

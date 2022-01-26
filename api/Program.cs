@@ -51,9 +51,15 @@ public class Program
 
         builder.Services.AddSingleton<CosmosClient>(s => 
         {
+            var serializerOptions = new CosmosSerializationOptions
+            {
+                PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
+            };
+
             var cosmosBuilder = new CosmosClientBuilder(
-                EndpointUri,
-                PrimaryReadOnlyKey);
+                    EndpointUri,
+                    PrimaryReadOnlyKey)
+                .WithSerializerOptions(serializerOptions);
 
             return cosmosBuilder.Build();
         });
