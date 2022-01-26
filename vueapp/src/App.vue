@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <Users />
+    <GameCard />
   </div>
 </template>
 
 <script>
-import Users from './components/Users.vue'
+import GameCard from './components/Game.vue'
 
-require("./new.scss");
+//require("./new.scss");
 
 export default {
   name: 'App',
   components: {
-    Users
+    GameCard
   }
 }
 </script>

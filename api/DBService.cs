@@ -24,7 +24,7 @@ public class DBService
             await this.CreateContainerAsync(containerId, partitionKey);
             // additemstocontainerasync if needed
 
-            String queryString = String.Format("SELECT {0} FROM {1}", selectKey, containerId);
+            String queryString = String.Format("SELECT * FROM {0} WHERE {0}.id = \"{1}\"", containerId, selectKey);
             q = await this.QueryItemsAsync(queryString);
             
             return q;

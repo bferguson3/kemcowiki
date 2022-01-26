@@ -18,7 +18,7 @@ namespace api.Services
             //    .FirstOrDefault(g => g.Id.Equals(gameId, StringComparison.InvariantCultureIgnoreCase));
 
             //return await Task.FromResult(matchingGame);
-            return await TestAsyncSingle("0001");
+            return await TestAsyncSingle(gameId);
         }
 
         public async Task<List<Game>> TestAsync(string sel)
