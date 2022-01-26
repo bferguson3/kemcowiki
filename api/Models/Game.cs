@@ -5,13 +5,14 @@ namespace api.Models
         public string Id { get; set; } = string.Empty;
         
         public string Title { get; set; } = string.Empty;
+
         public string? RomanizedTitle { get; set; } = string.Empty;
 
-        public List<Release>? Releases { get; set; }
+        public List<DataStub> Releases { get; set; } = new List<DataStub>();
 
-        public List<Mechanic>? SharedMechanics { get; set; }
+        public List<DataStub>? SharedMechanics { get; set; } = new List<DataStub>();
 
-        public GameSeries? Series { get; set; }
+        public DataStub? Series { get; set; }
         
         public TimeSpan? AveragePlayLength { get; set; }
     }
