@@ -41,10 +41,10 @@
 <script> 
     import axios from "axios";
 
-    let endpoint = 'https://localhost:7128/Game';
+    let endpoint = 'https://localhost:7128/Game/Frane';
 
     export default { 
-        name: "Users",
+        name: "GameCard",
         methods: {
             test() {
                 axios
@@ -58,6 +58,9 @@
                     alert(err); 
                 });
             }
+        },
+        created: function() {
+            this.test();
         }
     }
 </script> 
@@ -114,6 +117,9 @@ h2{
     text-align:left;
     margin-top:-5%;
     max-width:350px
+}
+.box.is-info-box{
+    text-align:left;
 }
 /* buttons */
 .button.has-left-border{
