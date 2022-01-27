@@ -39,6 +39,9 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        // adding a placeholder for some settings that we will deal with lattter
+        //  they'll go into a settings.json file that we can transform during deployment
+        //  but for now we've just got it hardcoded
         builder.Services.AddSingleton<IApiSettings>(s => 
         {
             var settings = new ApiSettings
@@ -49,8 +52,11 @@ public class Program
             return settings;
         });
 
+        //setting up the cosmos client for injection
+        // it gets injected in the DataService
         builder.Services.AddSingleton<CosmosClient>(s => 
         {
+            // these serializerOptions are needed to make the .Where() query in the data service work
             var serializerOptions = new CosmosSerializationOptions
             {
                 PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
@@ -64,6 +70,7 @@ public class Program
             return cosmosBuilder.Build();
         });
 
+        // this sets up the data service for injection into the Controller
         builder.Services.AddSingleton<IDataService, DataService>();
 
         var app = builder.Build();

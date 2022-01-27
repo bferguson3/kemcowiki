@@ -2,7 +2,8 @@ using api.Interfaces;
 
 namespace api.Models
 {
-    public class Game : IDataModel
+    public class Game : IDataModel 
+    // implements the IDataModel interface to guarantee the Id property
     {
         public string Id { get; set; } = string.Empty;
         

@@ -5,6 +5,8 @@ using api.Models;
 
 namespace api.Services
 {
+
+    //only keeping this for testing sql queries
 public class DBService : IDbService
 {
     public static readonly string EndpointUri = "https://kemcowiki.documents.azure.com:443/";

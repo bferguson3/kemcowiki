@@ -13,6 +13,7 @@ namespace api.Controllers
         private readonly ILogger<GameController> _logger;
         private readonly IDataService _dataService;
 
+        // these get injected into the constructor based on what we have set up in the Program.cs class
         public GameController(
             ILogger<GameController> logger,
             IDataService dataService)
@@ -24,6 +25,8 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            // this is calling the data service with a type of Game, which is used in there
+            //  where it has the <T> syntax
             var result = await _dataService.GetAll<Game>();
             return Ok(result);
         }
@@ -32,6 +35,8 @@ namespace api.Controllers
         [HttpGet("{gameId}")]
         public async Task<IActionResult> GetSingle(string gameId)
         {
+            // this is calling the data service with a type of Game, which is used in there
+            //  where it has the <T> syntax
             var result = await _dataService.GetSingle<Game>(gameId);
             return Ok(result);
         }
