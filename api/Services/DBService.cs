@@ -1,3 +1,5 @@
+// Legacy this for if we need SQL interface 
+
 using Microsoft.Azure.Cosmos;
 using api.Interfaces;
 using api.Services;

@@ -8,20 +8,21 @@
       </div>
       <div class="column is-11">
         <div class="box is-full-card">
-            <div class="box is-card-image">
+            <!--div class="box is-card-image is-loading"-->
+            <div class="button is-card-image is-loading">You should never see this text ever ever ever.
                 <div class="game-image"><img src="franeheader.jpg"></div>
                 <div class="box is-game-details">
                     <div class="teensytext">GAME TITLE</div>
-                        <div class="game-name-text">フラン</div>
+                        <div class="game-name-text">?</div>
                     <div class="teensytext">ROMANIZATION</div>
-                        <div class="game-name-text">Lost Memory of Angel ~ Frane</div>
+                        <div class="game-name-text">?</div>
                     <div class="teensytext">SERIES</div>
-                        <div class="smallertext"><a>Frane</a></div>
+                        <div class="smallertext"><a>?</a></div>
                     <div class="teensytext">SHARED MECHANICS</div>
-                        <div class="smallertext"><a href="">Heroine feeding</a>,<a href="">bump combat</a>
+                        <div class="smallertext"><a href="">?</a>, <a href="">?</a>
                         </div> 
                     <div class="teensytext">AVG PLAY LENGTH</div>
-                    07:45:00
+                    ?
                 </div>
                 a
             </div>
@@ -41,26 +42,38 @@
 <script> 
     import axios from "axios";
 
-    let endpoint = 'https://localhost:7128/Game/Frane';
+    //let endpoint = 'https://localhost:7128/Game/0fe5685a-4171-7141-41b9-a8313d252268';
+    let endpoint = 'https://localhost:7128/Game/';
+    let response = JSON.stringify("");
 
     export default { 
         name: "GameCard",
         methods: {
-            test() {
+            loadCard() {
+                const urlParams = new URLSearchParams(window.location.search);
+                
+                this.searchId = urlParams.get("id");
+                if (this.searchId != '')
+                    endpoint = endpoint + this.searchId;
+
                 axios
-                .get(endpoint)
-                .then(function(resp)
-                { 
-                    console.log(resp); 
-                })
-                .catch(function(err)
-                { 
-                    alert(err); 
+                    .get(endpoint)
+                    .then(function(resp)
+                    { 
+                        response = resp;
+                        console.log(response); 
+                    })
+                    .catch(function(err)
+                    { 
+                        alert(err); 
                 });
             }
         },
         created: function() {
-            this.test();
+            this.loadCard();
+        },
+        mounted() {
+
         }
     }
 </script> 
@@ -98,6 +111,12 @@ h2{
     margin-top:-7%;
 }
 /* boxes */
+.button.is-card-image{
+    width:40%;
+    padding-top:20%;
+    padding-bottom:20%;
+    
+}
 .box.is-card-image{
     width:40%;
 }
