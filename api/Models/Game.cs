@@ -1,8 +1,6 @@
-using api.Interfaces;
-
 namespace api.Models
 {
-    public class Game : IDataModel
+    public class Game
     {
         public string Id { get; set; } = string.Empty;
         

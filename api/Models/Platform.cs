@@ -1,8 +1,6 @@
-using api.Interfaces;
-
 namespace api.Models
 {
-    public class Platform : IDataModel
+    public class Platform
     {
         public string Id { get; set; } = string.Empty;
         

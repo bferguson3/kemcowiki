@@ -1,8 +1,6 @@
-using api.Interfaces;
-
 namespace api.Models
 {
-    public class Mechanic : IDataModel
+    public class Mechanic
     {
         public string Id { get; set; } = string.Empty;
         
