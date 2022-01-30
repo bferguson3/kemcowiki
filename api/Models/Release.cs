@@ -1,8 +1,6 @@
-using api.Interfaces;
-
 namespace api.Models
 {
-    public class Release : IDataModel
+    public class Release
     {
         public string Id { get; set; } = string.Empty;
         

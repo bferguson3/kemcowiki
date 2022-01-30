@@ -1,9 +1,11 @@
-using Microsoft.Azure.Cosmos;
+using api.Models;
 
 namespace api.Interfaces
 {
-    public interface IDbService
+    public interface IDBService
     {
-         Task<QueryDefinition> TestQueryAsync();
+        Task<List<Game>> GetAllGames();
+
+        Task<Game?> GetSingleGame(string id);
     }
 }

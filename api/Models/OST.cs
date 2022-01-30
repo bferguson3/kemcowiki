@@ -1,8 +1,6 @@
-using api.Interfaces;
-
 namespace api.Models
 {
-    public class OST : IDataModel
+    public class OST
     {
         public string Id { get; set; } = string.Empty;
         

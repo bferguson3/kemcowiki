@@ -1,8 +1,5 @@
 using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using System.Text.Json;
-using api.Models;
 
 namespace api.Controllers
 {
@@ -11,20 +8,20 @@ namespace api.Controllers
     public class GameController : ControllerBase
     {
         private readonly ILogger<GameController> _logger;
-        private readonly IDataService _dataService;
+        private readonly IDBService _dbService;
 
         public GameController(
             ILogger<GameController> logger,
-            IDataService dataService)
+            IDBService dbService)
         {
             _logger = logger;
-            _dataService = dataService;
+            _dbService = dbService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _dataService.GetAll<Game>();
+            var result = await _dbService.GetAllGames();
             return Ok(result);
         }
 
@@ -32,7 +29,7 @@ namespace api.Controllers
         [HttpGet("{gameId}")]
         public async Task<IActionResult> GetSingle(string gameId)
         {
-            var result = await _dataService.GetSingle<Game>(gameId);
+            var result = await _dbService.GetSingleGame(gameId);
             return Ok(result);
         }
     }

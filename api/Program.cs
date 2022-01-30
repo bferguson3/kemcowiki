@@ -1,11 +1,5 @@
 using api.Interfaces;
 using api.Services;
-using api.Models;
-using System;
-using System.Threading.Tasks;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Net;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using api.Settings;
@@ -64,7 +58,7 @@ public class Program
             return cosmosBuilder.Build();
         });
 
-        builder.Services.AddSingleton<IDataService, DataService>();
+        builder.Services.AddSingleton<IDBService, DBService>();
 
         var app = builder.Build();
 

@@ -1,8 +1,6 @@
-using api.Interfaces;
-
 namespace api.Models
 {
-    public class Track : IDataModel
+    public class Track
     {
         public string Id { get; set; } = string.Empty;
         
