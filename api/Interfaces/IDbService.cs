@@ -18,5 +18,8 @@ namespace api.Interfaces
 
         Task<List<OST>> GetAllOSTs();
         Task<OST?> GetSingleOST(string id);
+
+        Task<List<Platform>> GetAllPlatforms();
+        Task<Platform?> GetSinglePlatform(string id);
     }
 }

@@ -165,6 +165,35 @@ namespace api.Services
             return result;
         }
 
+        public async Task<List<Platform>> GetAllPlatforms()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.PlatformContainer);
+
+            var results = await GetQueryResults<Platform>(
+                DBConstants.PlatformContainer,
+                DBConstants.PlatformPartition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<Platform?> GetSinglePlatform(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.PlatformContainer,
+                id);
+
+            var results = await GetQueryResults<Platform>(
+                DBConstants.PlatformContainer,
+                DBConstants.PlatformPartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         private QueryDefinition GetAllEntityQueryDefinition(
             string containerName)
         {
