@@ -223,6 +223,35 @@ namespace api.Services
             return result;
         }
 
+        public async Task<List<Staff>> GetAllStaff()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.StaffContainer);
+
+            var results = await GetQueryResults<Staff>(
+                DBConstants.StaffContainer,
+                DBConstants.StaffPartition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<Staff?> GetSingleStaff(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.StaffContainer,
+                id);
+
+            var results = await GetQueryResults<Staff>(
+                DBConstants.StaffContainer,
+                DBConstants.StaffPartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         private QueryDefinition GetAllEntityQueryDefinition(
             string containerName)
         {

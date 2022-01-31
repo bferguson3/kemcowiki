@@ -24,5 +24,8 @@ namespace api.Interfaces
 
         Task<List<Release>> GetAllReleases();
         Task<Release?> GetSingleRelease(string id);
+
+        Task<List<Staff>> GetAllStaff();
+        Task<Staff?> GetSingleStaff(string id);
     }
 }
