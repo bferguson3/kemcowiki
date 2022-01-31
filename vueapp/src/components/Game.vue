@@ -41,10 +41,14 @@
 
 <script> 
     import axios from "axios";
-
+    import URLs from "../definitions/URLs.vue";
     //let endpoint = 'https://localhost:7128/Game/0fe5685a-4171-7141-41b9-a8313d252268';
-    let endpoint = 'https://localhost:7128/Game/';
+
+    let endpoint = null;
     let response = JSON.stringify("");
+    let searchId = "";
+    let found = true;
+
 
     export default { 
         name: "GameCard",
@@ -52,21 +56,44 @@
             loadCard() {
                 const urlParams = new URLSearchParams(window.location.search);
                 
-                this.searchId = urlParams.get("id");
-                if (this.searchId != '')
-                    endpoint = endpoint + this.searchId;
+                searchId = urlParams.get("id");
+                if(searchId == null)
+                    searchId = urlParams.get("name");
+
+                endpoint = URLs.LOCALROOT + URLs.GAME + searchId;
 
                 axios
                     .get(endpoint)
                     .then(function(resp)
                     { 
                         response = resp;
-                        console.log(response); 
+                        console.log(response);
+                        if (response.status == 204)
+                            found = false;
+                    })
+                    .then(function(resp){
+                        console.log(resp);
+                        if(!found){
+                            console.log("Searching stubs by name...");
+                            endpoint = URLs.LOCALROOT + URLs.DATASTUB + searchId;
+                            axios 
+                                .get(endpoint)
+                                .then(function (resp){
+                                    console.log(resp);
+                                })
+                                .catch(function(err) { 
+                                    console.log(err);
+                            });
+                            console.log(endpoint);
+                            
+                        }
                     })
                     .catch(function(err)
                     { 
                         alert(err); 
                 });
+                console.log("fall");
+                
             }
         },
         created: function() {
