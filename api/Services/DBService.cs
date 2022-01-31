@@ -78,6 +78,35 @@ namespace api.Services
             return result;
         }
 
+        public async Task<List<Series>> GetAllSeries()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.SeriesContainer);
+
+            var results = await GetQueryResults<Series>(
+                DBConstants.SeriesContainer,
+                DBConstants.SeriesPartition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<Series?> GetSingleSeries(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.SeriesContainer,
+                id);
+
+            var results = await GetQueryResults<Series>(
+                DBConstants.SeriesContainer,
+                DBConstants.SeriesPartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         private QueryDefinition GetAllEntityQueryDefinition(
             string containerName)
         {
