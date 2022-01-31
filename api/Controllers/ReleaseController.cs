@@ -5,13 +5,13 @@ namespace api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GameController : ControllerBase
+    public class ReleaseController : ControllerBase
     {
-        private readonly ILogger<GameController> _logger;
+        private readonly ILogger<ReleaseController> _logger;
         private readonly IDBService _dbService;
 
-        public GameController(
-            ILogger<GameController> logger,
+        public ReleaseController(
+            ILogger<ReleaseController> logger,
             IDBService dbService)
         {
             _logger = logger;
@@ -21,7 +21,7 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _dbService.GetAllGames();
+            var result = await _dbService.GetAllReleases();
             return Ok(result);
         }
 
@@ -29,7 +29,7 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSingle(string id)
         {
-            var result = await _dbService.GetSingleGame(id);
+            var result = await _dbService.GetSingleRelease(id);
             return Ok(result);
         }
     }

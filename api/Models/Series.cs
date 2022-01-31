@@ -1,6 +1,6 @@
 namespace api.Models
 {
-    public class Platform
+    public class Series
     {
         public string Id { get; set; } = string.Empty;
         

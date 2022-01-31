@@ -6,11 +6,10 @@ namespace api.Models
         
         public string TrackTitle { get; set; } = string.Empty;
 
-        public OST? OST { get; set; }
+        public int TrackNo { get; set; } = 0;
 
-        public int? TrackNo { get; set; } = 0;
         public TimeSpan? AveragePlayLength { get; set; }
 
-        public string? Lyrics { get; set; } = string.Empty;
+        public string Lyrics { get; set; } = string.Empty;
     }
 }

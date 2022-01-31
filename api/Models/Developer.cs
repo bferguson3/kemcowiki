@@ -5,14 +5,16 @@ namespace api.Models
         public string Id { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
+
         public string? RomanizedName { get; set; } = string.Empty;
 
-        public List<Employee>? Employees { get; set; }
-
         public DateTime? YearsActiveStart { get; set; }
+        
         public DateTime? YearsActiveEnd { get; set; }
 
-        public List<Game> GamesList { get; set; } = new List<Game>();
+        public List<DataStub> Staff { get; set; } = new List<DataStub>();
+
+        public List<DataStub> Games { get; set; } = new List<DataStub>();
         
     }
 }
