@@ -6,7 +6,7 @@ namespace api.Models
         
         public string Title { get; set; } = string.Empty;
         
-        public Game Game { get; set; }
+        public Game? Game { get; set; }
 
         public List<Track> TrackList { get; set; } = new List<Track>();
         

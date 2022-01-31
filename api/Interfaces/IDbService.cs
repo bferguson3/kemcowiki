@@ -11,6 +11,9 @@ namespace api.Interfaces
         Task<Developer?> GetSingleDeveloper(string id);
 
         Task<List<Series>> GetAllSeries();
-        Task<Series> GetSingleSeries(string id);
+        Task<Series?> GetSingleSeries(string id);
+
+        Task<List<Mechanic>> GetAllMechanics();
+        Task<Mechanic?> GetSingleMechanic(string id);
     }
 }

@@ -107,6 +107,35 @@ namespace api.Services
             return result;
         }
 
+        public async Task<List<Mechanic>> GetAllMechanics()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.MechanicContainer);
+
+            var results = await GetQueryResults<Mechanic>(
+                DBConstants.MechanicContainer,
+                DBConstants.MechanicParition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<Mechanic?> GetSingleMechanic(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.MechanicContainer,
+                id);
+
+            var results = await GetQueryResults<Mechanic>(
+                DBConstants.MechanicContainer,
+                DBConstants.MechanicParition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         private QueryDefinition GetAllEntityQueryDefinition(
             string containerName)
         {
