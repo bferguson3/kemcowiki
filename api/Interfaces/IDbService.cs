@@ -21,5 +21,8 @@ namespace api.Interfaces
 
         Task<List<Platform>> GetAllPlatforms();
         Task<Platform?> GetSinglePlatform(string id);
+
+        Task<List<Release>> GetAllReleases();
+        Task<Release?> GetSingleRelease(string id);
     }
 }

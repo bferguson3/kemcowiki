@@ -194,6 +194,35 @@ namespace api.Services
             return result;
         }
 
+        public async Task<List<Release>> GetAllReleases()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.ReleaseContainer);
+
+            var results = await GetQueryResults<Release>(
+                DBConstants.ReleaseContainer,
+                DBConstants.ReleasePartition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<Release?> GetSingleRelease(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.ReleaseContainer,
+                id);
+
+            var results = await GetQueryResults<Release>(
+                DBConstants.ReleaseContainer,
+                DBConstants.ReleasePartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         private QueryDefinition GetAllEntityQueryDefinition(
             string containerName)
         {
