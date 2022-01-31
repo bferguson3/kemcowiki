@@ -22,16 +22,93 @@ namespace api.Services
 
         public async Task<List<Game>> GetAllGames()
         {
-            var container = await GetDbContainer(
-                DBConstants.GameContainer,
-                DBConstants.GamePartition);
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.GameContainer);
 
-            var queryString = $"SELECT * FROM {DBConstants.GameContainer}";
+            var results = await GetQueryResults<Game>(
+                DBConstants.GameContainer,
+                DBConstants.GamePartition,
+                queryDefinition);
+            
+            return results;
+        }
+        
+        public async Task<Game?> GetSingleGame(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.GameContainer,
+                id);
+
+            var results = await GetQueryResults<Game>(
+                DBConstants.GameContainer,
+                DBConstants.GamePartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
+        public async Task<List<Developer>> GetAllDevelopers()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.DeveloperContainer);
+
+            var results = await GetQueryResults<Developer>(
+                DBConstants.DeveloperContainer,
+                DBConstants.DeveloperPartition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<Developer?> GetSingleDeveloper(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.DeveloperContainer,
+                id);
+
+            var results = await GetQueryResults<Developer>(
+                DBConstants.DeveloperContainer,
+                DBConstants.DeveloperPartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
+        private QueryDefinition GetAllEntityQueryDefinition(
+            string containerName)
+        {
+            var queryString = $"SELECT * FROM {containerName}";
             var queryDefinition = new QueryDefinition(queryString);
 
-            var results = new List<Game>();
+            return queryDefinition;
+        }
 
-            using (var iterator = container.GetItemQueryIterator<Game>(queryDefinition))
+        private QueryDefinition GetSingleEntityByIdQueryDefinition(
+            string containerName,
+            string id)
+        {
+            var queryString = $"SELECT * FROM {containerName} WHERE {containerName}.id='{id}'";
+            var queryDefinition = new QueryDefinition(queryString);
+
+            return queryDefinition;
+        }
+
+        private async Task<List<T>> GetQueryResults<T>(
+            string containerName,
+            string partitionName,
+            QueryDefinition queryDefinition)
+        {
+            var container = await GetDbContainer(
+                containerName,
+                partitionName);
+
+            var results = new List<T>();
+
+            using (var iterator = container.GetItemQueryIterator<T>(queryDefinition))
             {
                 while (iterator.HasMoreResults)
                 {
@@ -43,31 +120,6 @@ namespace api.Services
             }
             
             return results;
-        }
-        
-        public async Task<Game?> GetSingleGame(string id)
-        {
-            var container = await GetDbContainer(
-                DBConstants.GameContainer,
-                DBConstants.GamePartition);
-
-            var queryString = $"SELECT * FROM {DBConstants.GameContainer} WHERE id={id}";
-            var queryDefinition = new QueryDefinition(queryString);
-
-            var results = new List<Game>();
-
-            using (var iterator = container.GetItemQueryIterator<Game>(queryDefinition))
-            {
-                while (iterator.HasMoreResults)
-                {
-                    foreach (var item in await iterator.ReadNextAsync())
-                    {
-                        results.Add(item);
-                    }
-                }
-            }
-            
-            return results.FirstOrDefault();
         }
 
         private async Task<Container> GetDbContainer(

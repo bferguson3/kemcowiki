@@ -1,0 +1,36 @@
+using api.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class DeveloperController : ControllerBase
+    {
+        private readonly ILogger<GameController> _logger;
+        private readonly IDBService _dbService;
+
+        public DeveloperController(
+            ILogger<GameController> logger,
+            IDBService dbService)
+        {
+            _logger = logger;
+            _dbService = dbService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var result = await _dbService.GetAllDevelopers();
+            return Ok(result);
+        }
+
+
+        [HttpGet("{gameId}")]
+        public async Task<IActionResult> GetSingle(string gameId)
+        {
+            var result = await _dbService.GetSingleDeveloper(gameId);
+            return Ok(result);
+        }
+    }
+}
