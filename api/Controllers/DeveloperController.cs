@@ -26,10 +26,10 @@ namespace api.Controllers
         }
 
 
-        [HttpGet("{gameId}")]
-        public async Task<IActionResult> GetSingle(string gameId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSingle(string id)
         {
-            var result = await _dbService.GetSingleDeveloper(gameId);
+            var result = await _dbService.GetSingleDeveloper(id);
             return Ok(result);
         }
     }
