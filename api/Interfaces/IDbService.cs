@@ -15,5 +15,8 @@ namespace api.Interfaces
 
         Task<List<Mechanic>> GetAllMechanics();
         Task<Mechanic?> GetSingleMechanic(string id);
+
+        Task<List<OST>> GetAllOSTs();
+        Task<OST?> GetSingleOST(string id);
     }
 }

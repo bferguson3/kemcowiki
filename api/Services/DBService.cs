@@ -136,6 +136,35 @@ namespace api.Services
             return result;
         }
 
+        public async Task<List<OST>> GetAllOSTs()
+        {
+            var queryDefinition = GetAllEntityQueryDefinition(
+                DBConstants.OSTContainer);
+
+            var results = await GetQueryResults<OST>(
+                DBConstants.OSTContainer,
+                DBConstants.OSTPartition,
+                queryDefinition);
+            
+            return results;
+        }
+
+        public async Task<OST?> GetSingleOST(string id)
+        {
+            var queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.OSTContainer,
+                id);
+
+            var results = await GetQueryResults<OST>(
+                DBConstants.OSTContainer,
+                DBConstants.OSTPartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         private QueryDefinition GetAllEntityQueryDefinition(
             string containerName)
         {
