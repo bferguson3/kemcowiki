@@ -8,8 +8,8 @@ namespace api.Models
         
         public Game Game { get; set; }
 
-        public List<Track> TrackList { get; set; }
+        public List<Track> TrackList { get; set; } = new List<Track>();
         
-        public List<Employee> Composers { get; set; }
+        public List<DataStub> Composers { get; set; } = new List<DataStub>();
     }
 }

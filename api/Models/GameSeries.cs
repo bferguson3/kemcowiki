@@ -6,6 +6,6 @@ namespace api.Models
         
         public string SeriesName { get; set; } = string.Empty;
         
-        public List<Game>? SeriesGames { get; set; }
+        public List<DataStub> Games { get; set; } = new List<DataStub>();
     }
 }
