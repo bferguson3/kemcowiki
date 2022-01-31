@@ -7,11 +7,11 @@ namespace api.Controllers
     [Route("[controller]")]
     public class MechanicController : ControllerBase
     {
-        private readonly ILogger<GameController> _logger;
+        private readonly ILogger<MechanicController> _logger;
         private readonly IDBService _dbService;
 
         public MechanicController(
-            ILogger<GameController> logger,
+            ILogger<MechanicController> logger,
             IDBService dbService)
         {
             _logger = logger;

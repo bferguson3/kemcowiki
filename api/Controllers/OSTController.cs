@@ -7,11 +7,11 @@ namespace api.Controllers
     [Route("[controller]")]
     public class OSTController : ControllerBase
     {
-        private readonly ILogger<GameController> _logger;
+        private readonly ILogger<OSTController> _logger;
         private readonly IDBService _dbService;
 
         public OSTController(
-            ILogger<GameController> logger,
+            ILogger<OSTController> logger,
             IDBService dbService)
         {
             _logger = logger;
