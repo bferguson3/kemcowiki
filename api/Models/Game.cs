@@ -15,5 +15,8 @@ namespace api.Models
         public DataStub? Series { get; set; }
         
         public TimeSpan? AveragePlayLength { get; set; }
+
+        public List<DataPoint>? DataPoints { get; set; } = new List<DataPoint>();
+        
     }
 }

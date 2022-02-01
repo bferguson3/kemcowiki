@@ -42,6 +42,7 @@
 <script> 
     import axios from "axios";
     import URLs from "../definitions/URLs.vue";
+    import GameCardContainer from "./GameCardContainer.vue";
     //let endpoint = 'https://localhost:7128/Game/0fe5685a-4171-7141-41b9-a8313d252268';
 
     let endpoint = null;
@@ -49,11 +50,10 @@
     let searchId = "";
     let found = true;
 
-
     export default { 
         name: "GameCard",
         methods: {
-            loadCard() {
+            async loadCard() {
                 const urlParams = new URLSearchParams(window.location.search);
                 
                 searchId = urlParams.get("id");
@@ -61,39 +61,66 @@
                     searchId = urlParams.get("name");
 
                 endpoint = URLs.LOCALROOT + URLs.GAME + searchId;
+                endpoint = endpoint.toLowerCase();
 
+                // temp 
+                let g = new GameCardContainer();
+                //g.romanization = "Frane";
+                
                 axios
                     .get(endpoint)
                     .then(function(resp)
                     { 
                         response = resp;
-                        console.log(response);
+                        console.log("response: ", response);
                         if (response.status == 204)
                             found = false;
+                        else { 
+                            g.romanizedTitle = resp.data.romanizedTitle;
+                            g.gameTitle = resp.data.title;
+                            g.series = resp.data.series;
+                            g.sharedMechanics = resp.data.sharedMechanics;
+                            g.avgPlayLength = resp.data.averagePlayLength;
+                        }
                     })
-                    .then(function(resp){
-                        console.log(resp);
+                    .then(function(){
+                        //console.log("response 2: ", resp);
                         if(!found){
                             console.log("Searching stubs by name...");
+                            
                             endpoint = URLs.LOCALROOT + URLs.DATASTUB + searchId;
+                            endpoint = endpoint.toLowerCase();
+                            
                             axios 
                                 .get(endpoint)
                                 .then(function (resp){
-                                    console.log(resp);
+                                    response = resp;
+                                    console.log("response: ", response);
+                                    if (response.status == 204)
+                                        found = false;
+                                    else { 
+                                        g.romanizedTitle = resp.data.romanizedTitle;
+                                        g.gameTitle = resp.data.title;
+                                        g.series = resp.data.series;
+                                        g.sharedMechanics = resp.data.sharedMechanics;
+                                        g.avgPlayLength = resp.data.averagePlayLength;
+                                    }
                                 })
                                 .catch(function(err) { 
-                                    console.log(err);
+                                    console.log("error:", err);
                             });
-                            console.log(endpoint);
+                            console.log("endpoint: ", endpoint);
                             
                         }
                     })
                     .catch(function(err)
                     { 
-                        alert(err); 
-                });
-                console.log("fall");
-                
+                        alert("error:", err); 
+                    })
+                    .finally(function(){
+                        console.log(g);
+                    })
+            
             }
         },
         created: function() {
