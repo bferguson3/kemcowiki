@@ -18,5 +18,6 @@ namespace api.Models
 
         public List<DataPoint>? DataPoints { get; set; } = new List<DataPoint>();
         
+        public string? boxArtURL { get; set; } = string.Empty;
     }
 }

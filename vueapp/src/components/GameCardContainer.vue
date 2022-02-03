@@ -12,7 +12,8 @@ class GameCardContainer extends Vue {
             romanizedTitle: "",
             series: "",
             sharedMechanics: [],
-            avgPlayLength: ""
+            avgPlayLength: "",
+            boxArtURL:""
         }
     }
     
