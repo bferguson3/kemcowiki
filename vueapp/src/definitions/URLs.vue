@@ -1,7 +1,8 @@
 <script> 
 export default 
 { 
-    LOCALROOT: "https://localhost:7128/",
+    LOCALROOT: "https://kemcowiki.com/api/",
+    //LOCALROOT:"http://kemcowiki.com/",
     GAME: "Game/",
     DATASTUB: "DataStub/"
 }

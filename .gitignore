@@ -3,4 +3,4 @@ api/bin/**
 api/obj/**
 genguid
 genmd5
-
+vueapp/dist/**
