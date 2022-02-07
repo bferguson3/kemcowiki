@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PlatformController : ControllerBase
     {
         private readonly ILogger<PlatformController> _logger;
