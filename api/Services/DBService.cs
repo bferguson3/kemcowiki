@@ -49,6 +49,29 @@ namespace api.Services
             return result;
         }
 
+        public async Task<Game?> AddNewGame(Game newEntry)
+        {
+            
+            var queryDefinition = CreateNewGameQueryDefinition(
+                DBConstants.GameContainer,
+                newEntry);
+            
+
+            queryDefinition = GetSingleEntityByIdQueryDefinition(
+                DBConstants.GameContainer,
+                newEntry.Id);
+            
+
+            var results = await GetQueryResults<Game>(
+                DBConstants.GameContainer,
+                DBConstants.GamePartition,
+                queryDefinition);
+
+            var result = results.FirstOrDefault();
+
+            return result;
+        }
+
         public async Task<List<Developer>> GetAllDevelopers()
         {
             var queryDefinition = GetAllEntityQueryDefinition(
@@ -266,6 +289,18 @@ namespace api.Services
             string id)
         {
             var queryString = $"SELECT * FROM {containerName} WHERE {containerName}.id='{id}'";
+            var queryDefinition = new QueryDefinition(queryString);
+
+            return queryDefinition;
+        }
+        private QueryDefinition CreateNewGameQueryDefinition(
+            string containerName,
+            Game newEntry)
+        {
+            var queryString = $"INSERT INTO {containerName} (id, title, romanizedTitle, releases, sharedMechanics, series, averagePlayLength, dataPoints, boxArtURL) " +
+                $"VALUES ('{newEntry.Id}', '{newEntry.Title}', '{newEntry.RomanizedTitle}', " +
+                $"'{newEntry.Releases}', '{newEntry.SharedMechanics}', '{newEntry.Series}', '{newEntry.AveragePlayLength}', '{newEntry.DataPoints}', '{newEntry.BoxArtURL}');";
+
             var queryDefinition = new QueryDefinition(queryString);
 
             return queryDefinition;
