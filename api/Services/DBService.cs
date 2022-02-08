@@ -55,12 +55,6 @@ namespace api.Services
             var queryDefinition = CreateNewGameQueryDefinition(
                 DBConstants.GameContainer,
                 newEntry);
-            
-
-            queryDefinition = GetSingleEntityByIdQueryDefinition(
-                DBConstants.GameContainer,
-                newEntry.Id);
-            
 
             var results = await GetQueryResults<Game>(
                 DBConstants.GameContainer,
@@ -297,9 +291,11 @@ namespace api.Services
             string containerName,
             Game newEntry)
         {
-            var queryString = $"INSERT INTO {containerName} (id, title, romanizedTitle, releases, sharedMechanics, series, averagePlayLength, dataPoints, boxArtURL) " +
+            var queryString = $"INSERT INTO {containerName} (id, title, romanizedTitle, releases," +
+                $" sharedMechanics, series, averagePlayLength, dataPoints, boxArtURL) " +
                 $"VALUES ('{newEntry.Id}', '{newEntry.Title}', '{newEntry.RomanizedTitle}', " +
-                $"'{newEntry.Releases}', '{newEntry.SharedMechanics}', '{newEntry.Series}', '{newEntry.AveragePlayLength}', '{newEntry.DataPoints}', '{newEntry.BoxArtURL}');";
+                $"'{newEntry.Releases}', '{newEntry.SharedMechanics}', '{newEntry.Series}', " +
+                $"'{newEntry.AveragePlayLength}', '{newEntry.DataPoints}', '{newEntry.BoxArtURL}');";
 
             var queryDefinition = new QueryDefinition(queryString);
 

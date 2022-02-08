@@ -32,6 +32,5 @@ namespace api.Controllers
             var result = await _dbService.GetSingleMechanic(id);
             return Ok(result);
         }
-
     }
 }
