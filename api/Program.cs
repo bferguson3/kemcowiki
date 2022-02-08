@@ -22,7 +22,7 @@ public class Program
         {
             options.AddPolicy(name: NativeOrigin,
             builder=>{
-                builder.WithOrigins("http://localhost:8080")
+                builder.WithOrigins("http://localhost:1024")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
             });

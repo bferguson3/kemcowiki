@@ -1,18 +1,19 @@
 <template>
   <div id="app">
     <GameCard />
+    <!--Index /-->
   </div>
 </template>
 
 <script>
+//import Index from "./components/Index.vue"
 import GameCard from './components/Game.vue'
-
-//require("./new.scss");
 
 export default {
   name: 'App',
   components: {
-    GameCard
+    GameCard,
+    //Index
   }
 }
 </script>
