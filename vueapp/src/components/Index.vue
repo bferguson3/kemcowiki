@@ -1,20 +1,29 @@
 <template> 
 
-<div>
+<div class="index">
     <header>
-    a
+        a
     </header>
+
     <section>
         b
+        Search for a <span id="green-text">Kemco</span> game by name:
         <article>
             c 
         </article>
     </section>
+    
     <aside> 
         d 
     </aside>
+    
     <footer>
         e 
+        <nav class="footer-nav">
+            <a href="index.html">Home</a>&emsp;
+            <a href="mailto:admin@kemcowiki.com">Contact</a>&emsp;
+            <a href="http://www.rpginsanity.com" target="_blank">RPG Insanity</a>            
+        </nav>
     </footer>
 </div>
 
