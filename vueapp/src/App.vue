@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <!--GameCard /-->
-    <Index />
+    <GameCard />
+    <!--Index /-->
   </div>
 </template>
 
 <script>
-import Index from "/src/components/Index.vue"
-//import GameCard from './components/Game.vue'
+//import Index from "/src/components/Index.vue"
+import GameCard from '/src/components/Game.vue'
 
 export default {
   name: 'App',
   components: {
-    //GameCard,
-    Index
+    GameCard,
+    //Index
   }
 }
 </script>
