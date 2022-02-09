@@ -1,0 +1,24 @@
+/* Style sheet for index page */
+
+.index #green-text {
+    color: green;
+}
+
+
+/* Footer */
+
+
+/* a:link, a:active, a:visited a:hover */
+
+.index .footer-nav {
+    text-align: center;
+    background-color: darkgray;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 1%;
+}
+
+.index .footer-nav a {
+    color: aqua;
+    font-weight: bold;
+}
