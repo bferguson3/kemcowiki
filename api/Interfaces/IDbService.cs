@@ -6,6 +6,7 @@ namespace api.Interfaces
     {
         Task<List<Game>> GetAllGames();
         Task<Game?> GetSingleGame(string id);
+        Task<Game?> AddNewGame(Game newGame);
 
         Task<List<Developer>> GetAllDevelopers();
         Task<Developer?> GetSingleDeveloper(string id);

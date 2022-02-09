@@ -1,4 +1,5 @@
 using api.Interfaces;
+using api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -30,6 +31,16 @@ namespace api.Controllers
         public async Task<IActionResult> GetSingle(string id)
         {
             var result = await _dbService.GetSingleGame(id);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNew([FromBody] Game newEntry)
+        {
+            if (newEntry == null){
+                return BadRequest();
+            }
+            var result = await _dbService.AddNewGame(newEntry);
             return Ok(result);
         }
     }
