@@ -34,7 +34,7 @@ namespace api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("new")]
+        [HttpPost]
         public async Task<IActionResult> AddNew([FromBody] Game newEntry)
         {
             if (newEntry == null){
