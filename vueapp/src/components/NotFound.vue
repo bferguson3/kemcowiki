@@ -11,11 +11,7 @@
     </aside>
     
     <section>
-        b
-        Search for a <span id="green-text">Kemco</span> game by name: <a class="search-btn">Search</a>
-        <article>
-            c 
-        </article>
+        <h2>404 Not Found</h2>
     </section>
     
     <footer>
@@ -23,7 +19,7 @@
         <nav class="footer-nav">
             <a href="index.html">Home</a>&emsp;
             <a href="#/game">Games</a>&emsp;
-            <a href="#/404">Contact</a>&emsp;
+            <a href="mailto:admin@kemcowiki.com">Contact</a>&emsp;
             <a href="http://www.rpginsanity.com" target="_blank">RPG Insanity</a>            
         </nav>
     </footer>
@@ -31,12 +27,20 @@
 
 </template>
 
+<style scoped>
+h2 { 
+    text-align: center;
+    text-decoration: none;
+    font-size: 200%;
+}
+</style>
+
 <script> 
 //import axios from "axios";
 //import URLs from "../definitions/URLs.vue";
 
 export default { 
-    name: "Index",
+    name: "NotFound",
     methods: {
         async loadPage() {
             return 0;
@@ -49,7 +53,7 @@ export default {
             });
         Promise.all([p]).then(function(r) { 
             console.log(r[0]);
-            history.pushState({foo:'bar'},'','/');
+            
         });
     },
     mounted() {

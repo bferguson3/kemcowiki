@@ -1,19 +1,32 @@
 <template>
-  <div id="app">
-    <GameCard />
-    <!--Index /-->
-  </div>
+  <component :is="currentView" id="app"/>
 </template>
 
 <script>
-//import Index from "/src/components/Index.vue"
+import Index from "/src/components/Index.vue"
 import GameCard from '/src/components/Game.vue'
+import NotFound from '/src/components/NotFound.vue'
+
+const routes = {
+  '/': Index,
+  '/game': GameCard,
+  '/404': NotFound,
+}
 
 export default {
   name: 'App',
-  components: {
-    GameCard,
-    //Index
+  data() {
+    return { currentPath: window.location.hash }
+  },
+  computed: {
+    currentView() {
+      return routes[this.currentPath.slice(1) || '/'] || NotFound
+    }
+  },
+  mounted() {
+    window.addEventListener('hashchange', () => {
+		this.currentPath = window.location.hash
+	})
   }
 }
 </script>

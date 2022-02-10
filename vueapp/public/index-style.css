@@ -1,5 +1,9 @@
 /* Style sheet for index page */
 
+.index {
+    font-size: 12px;
+}
+
 .index #green-text {
     color: green;
 }
@@ -12,13 +16,36 @@
 
 .index .footer-nav {
     text-align: center;
-    background-color: darkgray;
-    margin-left: 20%;
-    margin-right: 20%;
+    background-color: rgb(230, 239, 255);
+    margin: 0 10% 0 10%;
     padding: 1%;
+    border-width: 5px;
+    border-style: outset;
+    border-color: rgb(233, 114, 159);
+    border-radius: 8px 4px 6px 12px;
 }
 
 .index .footer-nav a {
-    color: aqua;
+    color: rgb(93, 83, 240);
     font-weight: bold;
+}
+
+
+/* buttons */
+
+.index .search-btn {
+    margin: 2px 4px 2px 4px;
+    padding: 2px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(233, 114, 159);
+    border-radius: 8px 4px 6px 12px;
+}
+
+.index .nav-menu {
+    float: left;
+    background-color: cornflowerblue;
+    width: 5%;
+    height: 100%;
+    min-height: 2000px;
 }
