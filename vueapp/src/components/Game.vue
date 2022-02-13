@@ -41,6 +41,9 @@
         e
     </div>
     </div>
+    <footer>
+        <Footer />
+    </footer>
 </div>
 
 </template>
@@ -49,20 +52,22 @@
     import axios from "axios";
     import URLs from "../definitions/URLs.vue";
     import GameCardContainer from "./GameCardContainer.vue";
+    import Footer from "/src/components/Footer.vue";
     
-    //let endpoint = 'https://localhost:7128/Game/0fe5685a-4171-7141-41b9-a8313d252268';
-
     let endpoint = null;
     let gcc = new GameCardContainer();
-    //let response = JSON.stringify("");
     let searchId = "";
-    //let found = true;
 
     export default { 
         name: "GameCard",
+        components:{
+            Footer
+        },
         methods: {
             async loadCard() {
+
                 const urlParams = new URLSearchParams(window.location.search);
+                
                 searchId = urlParams.get("id");
                 if(searchId == null)
                     searchId = urlParams.get("name");
@@ -76,12 +81,14 @@
         created: function() {
             let p = this.loadCard() // returns P<Game>
                 .then( async function(resp) {
+
                     gcc.romanizedTitle = resp.data.romanizedTitle;
                     gcc.gameTitle = resp.data.title;
                     gcc.series = resp.data.series;
                     gcc.sharedMechanics = resp.data.sharedMechanics;
                     gcc.avgPlayLength = resp.data.averagePlayLength;
                     gcc.boxArtURL = resp.data.boxArtURL;
+                    
                     return resp;
                 });
             Promise.all([p]).then(function(r) { 
@@ -122,6 +129,7 @@
                 // TODO 
                 
             });
+            
         },
         mounted() {
 

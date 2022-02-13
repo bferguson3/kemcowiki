@@ -14,28 +14,12 @@
 
 /* a:link, a:active, a:visited a:hover */
 
-.index .footer-nav {
-    text-align: center;
-    background-color: rgb(230, 239, 255);
-    margin: 0 10% 0 10%;
-    padding: 1%;
-    border-width: 5px;
-    border-style: outset;
-    border-color: rgb(233, 114, 159);
-    border-radius: 8px 4px 6px 12px;
-}
-
-.index .footer-nav a {
-    color: rgb(93, 83, 240);
-    font-weight: bold;
-}
-
 
 /* buttons */
 
 .index .search-btn {
     margin: 2px 4px 2px 4px;
-    padding: 2px;
+    padding: 4px;
     border-style: solid;
     border-width: 2px;
     border-color: rgb(233, 114, 159);
@@ -47,5 +31,17 @@
     background-color: cornflowerblue;
     width: 5%;
     height: 100%;
-    min-height: 2000px;
+}
+
+.footer {
+    background-color: white;
+    width: 70%;
+}
+
+.index .search-bar {
+    width: 200px;
+    background: rgb(220, 255, 220);
+    display: inline-block;
+    border: solid;
+    border-color: blue;
 }
