@@ -74,7 +74,7 @@
                 if(searchId == null)
                     searchId = urlParams.get("name");
 
-                endpoint = URLs.LOCALROOT + URLs.GAME + '/' + searchId;
+                endpoint = URLs.LOCALROOT + URLs.GAMEAPI + searchId;
                 endpoint = endpoint.toLowerCase();
 
                 return axios.get(endpoint);
@@ -134,7 +134,7 @@
             });
             
         },
-        
+
         mounted() {
 
         }

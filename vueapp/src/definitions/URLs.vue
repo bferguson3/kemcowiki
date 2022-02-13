@@ -5,6 +5,7 @@ export default
     LOCALROOT: "https://kemcowiki.com/api/",
     // Use this line for dev/test:
     //LOCALROOT: "https://localhost:5001/api/",
+    GAMEAPI: "Game/",
     GAME: "#/Game",
     DATASTUB: "#/DataStub",
     INDEX: "#/",
