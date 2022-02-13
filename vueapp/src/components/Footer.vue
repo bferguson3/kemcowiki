@@ -4,10 +4,10 @@
     <center>
         <!-- TODO: Change these URLs to global constants-->
         <nav class="footer-nav">
-            <a id="home-nav">Home</a>&emsp;
-            <a id="game-nav">Games</a>&emsp;
-            <a href="https://discord.gg/JDa7GrpuHC" target="_blank">Discord</a>&emsp;
-            <a href="http://www.rpginsanity.com" target="_blank">RPGInsanity</a>&emsp;
+            <a id="home-nav">Home</a>&emsp;|&emsp;
+            <a id="game-nav">Games</a>&emsp;|&emsp;
+            <a href="https://discord.gg/JDa7GrpuHC" target="_blank">Discord</a>&emsp;|&emsp;
+            <a href="http://www.rpginsanity.com" target="_blank">RPGInsanity</a>&emsp;|&emsp;
             <a id="contact-nav">Contact</a>&emsp;
         </nav>
     </center>
@@ -16,10 +16,7 @@
 
 <script> 
 import URLs from '/src/definitions/URLs.vue'
-    //GAME: "#/Game",
-    //DATASTUB: "#/DataStub",
-    //INDEX: "#/",
-    //NOTFOUND: "#/404",
+
 export default { 
     name: "Footer",
 

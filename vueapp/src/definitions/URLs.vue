@@ -6,10 +6,10 @@ export default
     // Use this line for dev/test:
     //LOCALROOT: "https://localhost:5001/api/",
     GAMEAPI: "Game/",
-    GAME: "#/Game",
-    DATASTUB: "#/DataStub",
-    INDEX: "#/",
-    NOTFOUND: "#/404",
+    GAME: "/Game",
+    DATASTUB: "/DataStub",
+    INDEX: "/",
+    NOTFOUND: "/404",
 }
 
 </script>

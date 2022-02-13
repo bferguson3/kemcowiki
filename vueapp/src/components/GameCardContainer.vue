@@ -1,8 +1,10 @@
 <script>
-import Vue from 'vue'
 
-class GameCardContainer extends Vue {
+class GameCardContainer {
     // constructor override
+    constructor() {
+        return self;
+    }
     GameCardContainer() {
         
     }

@@ -13,8 +13,9 @@
     "core-js": "^3.6.5",
     "node-sass": "^6",
     "sass-loader": "^10.2.1",
-    "vue": "^2.6.11",
-    "vue-property-decorator": "^9.1.2"
+    "vue": "^3.2.31",
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
