@@ -5,10 +5,11 @@ export default
     LOCALROOT: "https://kemcowiki.com/api/",
     // Use this line for dev/test:
     //LOCALROOT: "https://localhost:5001/api/",
-    GAME: "Game",
-    DATASTUB: "DataStub",
-    INDEX: "",
-    NOTFOUND: "404",
+    GAMEAPI: "Game/",
+    GAME: "/Game",
+    DATASTUB: "/DataStub",
+    INDEX: "/",
+    NOTFOUND: "/404",
 }
 
 </script>

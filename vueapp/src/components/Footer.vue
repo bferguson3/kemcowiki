@@ -4,17 +4,19 @@
     <center>
         <!-- TODO: Change these URLs to global constants-->
         <nav class="footer-nav">
-            <a href="/">Home</a>&emsp;
-            <a href="/Game">Games</a>&emsp;
-            <a href="https://discord.gg/JDa7GrpuHC" target="_blank">Discord</a>&emsp;
-            <a href="http://www.rpginsanity.com" target="_blank">RPGInsanity</a>&emsp;
-            <a href="404">Contact</a>&emsp;
+            <a id="home-nav">Home</a>&emsp;|&emsp;
+            <a id="game-nav">Games</a>&emsp;|&emsp;
+            <a href="https://discord.gg/JDa7GrpuHC" target="_blank">Discord</a>&emsp;|&emsp;
+            <a href="http://www.rpginsanity.com" target="_blank">RPGInsanity</a>&emsp;|&emsp;
+            <a id="contact-nav">Contact</a>&emsp;
         </nav>
     </center>
 </div>
 </template>
 
 <script> 
+import URLs from '/src/definitions/URLs.vue'
+
 export default { 
     name: "Footer",
 
@@ -30,11 +32,15 @@ export default {
                 return resp;
             });
         Promise.all([p]).then(function(r) { 
+            document.getElementById("home-nav").setAttribute('href', URLs.INDEX);
+            document.getElementById("game-nav").setAttribute('href', URLs.GAME);
+            document.getElementById("contact-nav").setAttribute('href', URLs.NOTFOUND);
+            
             console.log(r[0]);
             
         });
     },
-    
+
     mounted() {
 
     }
