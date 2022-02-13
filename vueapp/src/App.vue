@@ -1,5 +1,7 @@
 <template>
+<div>
   <component :is="currentView" id="app"/>
+</div>
 </template>
 
 <script>
@@ -7,11 +9,11 @@ import Index from "/src/components/Index.vue"
 import GameCard from '/src/components/Game.vue'
 import NotFound from '/src/components/NotFound.vue'
 
-const routes = {
-  '/': Index,
-  '/game': GameCard,
-  '/404': NotFound,
-}
+const routes = [
+  { path: '', component: Index },
+  { path: 'game', component: GameCard },
+  { path: '404', component: NotFound },
+]
 
 export default {
   name: 'App',
@@ -20,13 +22,26 @@ export default {
   },
   computed: {
     currentView() {
-      return routes[this.currentPath.slice(1) || '/'] || NotFound
+      if (window.location.pathname.includes('game')){
+        return GameCard;
+      }
+
+      for(var i=0; i < routes.length; i++){ 
+        if ('/' + routes[i].path == window.location.pathname)
+            return routes[i].component;
+      }
+      
+      return NotFound;
+    }
+  },
+  methods: {
+    changeHash: function() {  
+      this.currentPath = window.location.hash;
     }
   },
   mounted() {
-    window.addEventListener('hashchange', () => {
-		this.currentPath = window.location.hash
-	})
+    window.addEventListener('hashchange', this.changeHash());
+    
   }
 }
 </script>

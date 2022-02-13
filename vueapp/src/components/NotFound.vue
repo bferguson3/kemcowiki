@@ -1,6 +1,6 @@
 <template> 
 
-<div class="index">
+<div>
     
     <header>
         a
@@ -15,13 +15,7 @@
     </section>
     
     <footer>
-        e 
-        <nav class="footer-nav">
-            <a href="index.html">Home</a>&emsp;
-            <a href="#/game">Games</a>&emsp;
-            <a href="mailto:admin@kemcowiki.com">Contact</a>&emsp;
-            <a href="http://www.rpginsanity.com" target="_blank">RPG Insanity</a>            
-        </nav>
+        <Footer />
     </footer>
 </div>
 
@@ -36,8 +30,7 @@ h2 {
 </style>
 
 <script> 
-//import axios from "axios";
-//import URLs from "../definitions/URLs.vue";
+import Footer from "/src/components/Footer.vue";
 
 export default { 
     name: "NotFound",
@@ -45,6 +38,9 @@ export default {
         async loadPage() {
             return 0;
         }            
+    },
+    components: {
+        Footer,
     },
     created: function() {
         let p = this.loadPage() // returns P<Game>

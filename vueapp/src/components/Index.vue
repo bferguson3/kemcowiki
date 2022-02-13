@@ -12,31 +12,30 @@
     
     <section>
         b
-        Search for a <span id="green-text">Kemco</span> game by name: <a class="search-btn">Search</a>
+        Search for a <span id="green-text">Kemco</span> game by name: <br>
+        <span class="search-bar" >asdf</span><a class="search-btn">Search</a>
         <article>
             c 
         </article>
     </section>
     
     <footer>
-        e 
-        <nav class="footer-nav">
-            <a href="index.html">Home</a>&emsp;
-            <a href="#/game">Games</a>&emsp;
-            <a href="#/404">Contact</a>&emsp;
-            <a href="http://www.rpginsanity.com" target="_blank">RPG Insanity</a>            
-        </nav>
+        <center>
+        <Footer class="footer" />
+        </center>
     </footer>
 </div>
 
 </template>
 
 <script> 
-//import axios from "axios";
-//import URLs from "../definitions/URLs.vue";
+import Footer from "/src/components/Footer.vue"
 
 export default { 
     name: "Index",
+    components: { 
+        Footer
+    },
     methods: {
         async loadPage() {
             return 0;
@@ -49,7 +48,7 @@ export default {
             });
         Promise.all([p]).then(function(r) { 
             console.log(r[0]);
-            history.pushState({foo:'bar'},'','/');
+            document.title = "KemcoWiki - Under Construction"
         });
     },
     mounted() {
