@@ -60,9 +60,11 @@
 
     export default { 
         name: "GameCard",
+
         components:{
             Footer
         },
+
         methods: {
             async loadCard() {
 
@@ -72,12 +74,13 @@
                 if(searchId == null)
                     searchId = urlParams.get("name");
 
-                endpoint = URLs.LOCALROOT + URLs.GAME + searchId;
+                endpoint = URLs.LOCALROOT + URLs.GAME + '/' + searchId;
                 endpoint = endpoint.toLowerCase();
 
                 return axios.get(endpoint);
             }            
         },
+
         created: function() {
             let p = this.loadCard() // returns P<Game>
                 .then( async function(resp) {
@@ -131,6 +134,7 @@
             });
             
         },
+        
         mounted() {
 
         }

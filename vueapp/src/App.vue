@@ -8,37 +8,47 @@
 import Index from "/src/components/Index.vue"
 import GameCard from '/src/components/Game.vue'
 import NotFound from '/src/components/NotFound.vue'
+import URLs from '/src/definitions/URLs'
 
 const routes = [
-  { path: '', component: Index },
-  { path: 'game', component: GameCard },
-  { path: '404', component: NotFound },
+  { path: URLs.INDEX, component: Index },
+  { path: URLs.GAME, component: GameCard },
+  { path: URLs.NOTFOUND, component: NotFound },
 ]
 
 export default {
   name: 'App',
+
   data() {
     return { currentPath: window.location.hash }
   },
+
   computed: {
     currentView() {
-      if (window.location.pathname.includes('game')){
+      let np = new String(window.location.pathname);
+      np = np.toLowerCase();
+      
+      if (np.includes('game'))
         return GameCard;
-      }
-
+      
       for(var i=0; i < routes.length; i++){ 
-        if ('/' + routes[i].path == window.location.pathname)
+          if (routes[i].path == undefined)
+            return Index;
+
+          if (new String('/' + routes[i].path).toLowerCase() == np)
             return routes[i].component;
       }
       
       return NotFound;
     }
   },
+
   methods: {
     changeHash: function() {  
       this.currentPath = window.location.hash;
     }
   },
+  
   mounted() {
     window.addEventListener('hashchange', this.changeHash());
     
