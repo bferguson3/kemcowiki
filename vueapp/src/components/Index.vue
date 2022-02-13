@@ -33,14 +33,17 @@ import Footer from "/src/components/Footer.vue"
 
 export default { 
     name: "Index",
+
     components: { 
         Footer
     },
+
     methods: {
         async loadPage() {
             return 0;
         }            
     },
+
     created: function() {
         let p = this.loadPage() // returns P<Game>
             .then( async function(resp) {
@@ -51,6 +54,7 @@ export default {
             document.title = "KemcoWiki - Under Construction"
         });
     },
+    
     mounted() {
 
     }
