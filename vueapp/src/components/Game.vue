@@ -2,7 +2,9 @@
 <div>
     <div class="columns base-column">
     <div class="column">
-        <p class="teensytext">KEMCO WIKI TEST</p>
+        <p align="right" class="teensytext">KEMCO WIKI TEST</p> 
+        <a align="right" class="add-new-game-btn" id="addNewButton">Add New...</a>
+            
         <div class="columns is-mobile">
         <div class="column is-1">
             <p class="box is-info">X</p>
@@ -32,6 +34,7 @@
                 </div>
                 b
             </div>
+
             <div class="box is-full-card">
                 <div class="box is-info-box"><h2>General Summary</h2>Summary goes here</div>
             </div>
@@ -136,7 +139,7 @@
         },
 
         mounted() {
-
+            document.getElementById("addNewButton").setAttribute('href', URLs.NEWGAME);
         }
     }
 </script> 
