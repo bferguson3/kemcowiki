@@ -23,7 +23,8 @@
                         <div class="teensytext">YOUR PLAY LENGTH<a class="help-button">&nbsp;?&nbsp; </a></div>
                         <div id="avg-play-length">?</div>
                     
-                    a
+                    a<br>
+                    <div class="button" ref="submit-new-game" v-on:click="submitNew">Submit</div>
                 </div>
                 b
             </div>
@@ -44,8 +45,9 @@
 </template>
 
 <script> 
-
     import Footer from "/src/components/Footer.vue";    
+    import URLs from "/src/definitions/URLs.vue";
+    import axios from "axios";
 
     export default { 
         name: "NewGame",
@@ -53,7 +55,7 @@
         components:{
             Footer
         },
-
+        
         methods: {
             async loadCard() {
                 /*
@@ -68,7 +70,31 @@
 
                 return axios.get(endpoint);
                 */
-            }            
+            },
+            async submitNew() 
+            { 
+                console.log("OK");
+
+                let endpoint = URLs.LOCALROOT + URLs.GAMEAPI;
+                console.log(endpoint);
+
+                return axios.post(endpoint, {
+                    Id: '0000',
+                    Title: 'New Game'
+                }, 
+                { 
+                    headers: {
+                        'Access-Control-Allow-Origin':['http://localhost:1024','https://localhost:5001/api/Game/']
+                    }
+                });
+                /*.then(function (r){
+                    console.log(r);
+                })
+                .catch(function (e){
+                    console.log('exception' + e);
+                });
+                */
+            }
         },
 
         created: function() {
@@ -76,11 +102,13 @@
                 .then( async function(resp) {
 
                     return resp;
-                });
-            Promise.all([p]).then(function(r) { 
-                console.log(r[0]);
-                
-            });
+                }
+            );
+            Promise.all([p])
+                .then(function(r) { 
+                    console.log(r[0]);
+                }
+            );
             
         },
 

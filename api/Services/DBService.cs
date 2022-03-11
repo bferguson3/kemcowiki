@@ -287,6 +287,7 @@ namespace api.Services
 
             return queryDefinition;
         }
+
         private QueryDefinition CreateNewGameQueryDefinition(
             string containerName,
             Game newEntry)
