@@ -14,10 +14,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production",
-        "COSMOS_CONNECTION_STRING": "AccountEndpoint=https://kemcowiki.documents.azure.com:443/;AccountKey=bSze2NonHGMvoq22KrFkMevzmXNx1sxrle3acGRcQ1j64zwE7H7u3txaa0lLCjTMcWavfBIsXBHxsmxOrQyzWg==;",
-        "COSMOS_ENDPOINT": "https://kemcowiki.documents.azure.com:443/",
-        "COSMOS_KEY": "bSze2NonHGMvoq22KrFkMevzmXNx1sxrle3acGRcQ1j64zwE7H7u3txaa0lLCjTMcWavfBIsXBHxsmxOrQyzWg=="
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "IIS Express": {

@@ -79,8 +79,8 @@
                 console.log(endpoint);
 
                 return axios.post(endpoint, {
-                    Id: '0000',
-                    Title: 'New Game'
+                    Id: '0001',
+                    Title: 'New Game Test'
                 }, 
                 { 
                     headers: {

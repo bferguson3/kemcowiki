@@ -52,7 +52,7 @@ namespace api.Services
 
         public async Task<Game?> AddNewGame(Game newEntry)
         {
-            CreateNewGameQueryDefinition(DBConstants.GameContainer, newEntry);
+            var gameResult = await CreateNewGameQueryDefinition(DBConstants.GameContainer, newEntry);
             /*
             var queryDefinition = CreateNewGameQueryDefinition(
                 DBConstants.GameContainer,
@@ -65,7 +65,7 @@ namespace api.Services
 
             var result = results.FirstOrDefault();
             */
-            return null; //result;
+            return gameResult; //result;
         }
 
         public async Task<List<Developer>> GetAllDevelopers()
@@ -310,9 +310,11 @@ namespace api.Services
                 throughput: 400
             );
 
-            return await container.CreateItemAsync<Game>(
+            var newGameResponse = await container.CreateItemAsync<Game>(
                 item: newEntry
             );
+
+            return newGameResponse;
         }
 
         private async Task<List<T>> GetQueryResults<T>(

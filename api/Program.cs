@@ -3,6 +3,8 @@ using api.Services;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using api.Settings;
+using Microsoft.Extensions.Configuration;
+using System;
 
 public class Program
 {
@@ -15,7 +17,22 @@ public class Program
     
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        // Build local configuration vars
+        IConfigurationBuilder config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.local.json", optional: false)
+            .AddEnvironmentVariables();
+        
+        IConfigurationRoot rootvars = config.Build();
+        
+        Environment.SetEnvironmentVariable("COSMOS_CONNECTION_STRING", 
+            $"{rootvars["COSMOS_CONNECTION_STRING"]}");
+        Environment.SetEnvironmentVariable("COSMOS_ENDPOINT", 
+            $"{rootvars["COSMOS_ENDPOINT"]}");
+        Environment.SetEnvironmentVariable("COSMOS_KEY", 
+            $"{rootvars["COSMOS_KEY"]}");
+
+        // Build web application
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         var NativeOrigin = "_nativeOrigin";
         builder.Services.AddCors(options=>
