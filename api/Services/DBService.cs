@@ -295,7 +295,6 @@ namespace api.Services
             Game newEntry)
         {
             // 1. Is there a way to get database without Create method?
-            
             using CosmosClient client = new(
                 accountEndpoint: Environment.GetEnvironmentVariable("COSMOS_ENDPOINT")!,
                 authKeyOrResourceToken: Environment.GetEnvironmentVariable("COSMOS_KEY")!
@@ -306,13 +305,11 @@ namespace api.Services
             
 
             Container container = await _database.CreateContainerIfNotExistsAsync(
-                id: "games",
-                partitionKeyPath: "/games",
+                id: DBConstants.GameContainer,
+                partitionKeyPath: DBConstants.GamePartition,
                 throughput: 400
             );
 
-
-            //Console.WriteLine($"New container:\t{container.Id}");
             return await container.CreateItemAsync<Game>(
                 item: newEntry
             );
