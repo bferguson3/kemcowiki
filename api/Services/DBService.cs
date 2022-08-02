@@ -2,6 +2,7 @@ using api.Constants;
 using api.Interfaces;
 using api.Models;
 using Microsoft.Azure.Cosmos;
+using Azure.Data.Tables;
 
 namespace api.Services
 {
@@ -51,7 +52,8 @@ namespace api.Services
 
         public async Task<Game?> AddNewGame(Game newEntry)
         {
-            
+            CreateNewGameQueryDefinition(DBConstants.GameContainer, newEntry);
+            /*
             var queryDefinition = CreateNewGameQueryDefinition(
                 DBConstants.GameContainer,
                 newEntry);
@@ -62,8 +64,8 @@ namespace api.Services
                 queryDefinition);
 
             var result = results.FirstOrDefault();
-
-            return result;
+            */
+            return null; //result;
         }
 
         public async Task<List<Developer>> GetAllDevelopers()
@@ -288,19 +290,32 @@ namespace api.Services
             return queryDefinition;
         }
 
-        private QueryDefinition CreateNewGameQueryDefinition(
+        private async Task<Game> CreateNewGameQueryDefinition(
             string containerName,
             Game newEntry)
         {
-            var queryString = $"INSERT INTO {containerName} (id, title, romanizedTitle, releases," +
-                $" sharedMechanics, series, averagePlayLength, dataPoints, boxArtURL) " +
-                $"VALUES ('{newEntry.Id}', '{newEntry.Title}', '{newEntry.RomanizedTitle}', " +
-                $"'{newEntry.Releases}', '{newEntry.SharedMechanics}', '{newEntry.Series}', " +
-                $"'{newEntry.AveragePlayLength}', '{newEntry.DataPoints}', '{newEntry.BoxArtURL}');";
+            // 1. Is there a way to get database without Create method?
+            
+            using CosmosClient client = new(
+                accountEndpoint: Environment.GetEnvironmentVariable("COSMOS_ENDPOINT")!,
+                authKeyOrResourceToken: Environment.GetEnvironmentVariable("COSMOS_KEY")!
+            );
 
-            var queryDefinition = new QueryDefinition(queryString);
+            _database = _database ?? await client
+                .CreateDatabaseIfNotExistsAsync(_settings.DatabaseName);
+            
 
-            return queryDefinition;
+            Container container = await _database.CreateContainerIfNotExistsAsync(
+                id: "games",
+                partitionKeyPath: "/games",
+                throughput: 400
+            );
+
+
+            //Console.WriteLine($"New container:\t{container.Id}");
+            return await container.CreateItemAsync<Game>(
+                item: newEntry
+            );
         }
 
         private async Task<List<T>> GetQueryResults<T>(

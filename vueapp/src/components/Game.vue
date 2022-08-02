@@ -18,19 +18,20 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="game-image"><img id="game-image-src" src=""></div>
-                    <div class="box is-game-details">
-                        <div class="teensytext">GAME TITLE</div>
-                            <div class="game-name-text" id="game-title-text">?</div>
-                        <div class="teensytext">ROMANIZATION</div>
-                            <div class="game-name-text" id="romanized-title">?</div>
-                        <div class="teensytext">SERIES</div>
-                            <div class="smallertext" id="series-name"><a>?</a></div>
-                        <div class="teensytext">SHARED MECHANICS</div>
-                            <div class="smallertext" id="shared-mechanics-list">?</div> 
-                        <div class="teensytext">AVG PLAY LENGTH</div>
-                        <div id="avg-play-length">?</div>
-                    </div>
+                    
                     a
+                </div>
+                <div class="box is-game-details">
+                    <div class="teensytext">GAME TITLE</div>
+                        <div class="game-name-text" id="game-title-text">?</div>
+                    <div class="teensytext">ROMANIZATION</div>
+                        <div class="game-name-text" id="romanized-title">?</div>
+                    <div class="teensytext">SERIES</div>
+                        <div class="smallertext" id="series-name"><a>?</a></div>
+                    <div class="teensytext">SHARED MECHANICS</div>
+                        <div class="smallertext" id="shared-mechanics-list">?</div> 
+                    <div class="teensytext">AVG PLAY LENGTH</div>
+                    <div id="avg-play-length">?</div>
                 </div>
                 b
             </div>

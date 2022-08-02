@@ -10,7 +10,7 @@ h2 {
 /* images */
 
 .game-image {
-    margin-bottom: -50%;
+    
 }
 
 
@@ -78,11 +78,12 @@ h2 {
 .box.is-game-details {
     text-align: left;
     margin-top: 0;
-    float: right;
+    margin-left: 2%;
 }
 
 .box.is-info-box {
     text-align: left;
+    width: 100%;
 }
 
 
