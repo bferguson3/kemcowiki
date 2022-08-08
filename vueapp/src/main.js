@@ -13,5 +13,7 @@ const router = createRouter({
 });
 
 const app = createApp(App);
+app.config.globalProperties.$log = console.log
+
 app.use(router);
 app.mount("#app");

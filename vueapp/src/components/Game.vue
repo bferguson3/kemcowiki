@@ -2,7 +2,9 @@
 <div>
     <div class="columns base-column">
     <div class="column">
-        <p class="teensytext">KEMCO WIKI TEST</p>
+        <p align="right" class="teensytext">KEMCO WIKI TEST</p> 
+        <a align="right" class="add-new-game-btn" id="addNewButton">Add New...</a>
+            
         <div class="columns is-mobile">
         <div class="column is-1">
             <p class="box is-info">X</p>
@@ -16,22 +18,24 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="game-image"><img id="game-image-src" src=""></div>
-                    <div class="box is-game-details">
-                        <div class="teensytext">GAME TITLE</div>
-                            <div class="game-name-text" id="game-title-text">?</div>
-                        <div class="teensytext">ROMANIZATION</div>
-                            <div class="game-name-text" id="romanized-title">?</div>
-                        <div class="teensytext">SERIES</div>
-                            <div class="smallertext" id="series-name"><a>?</a></div>
-                        <div class="teensytext">SHARED MECHANICS</div>
-                            <div class="smallertext" id="shared-mechanics-list">?</div> 
-                        <div class="teensytext">AVG PLAY LENGTH</div>
-                        <div id="avg-play-length">?</div>
-                    </div>
+                    
                     a
+                </div>
+                <div class="box is-game-details">
+                    <div class="teensytext">GAME TITLE</div>
+                        <div class="game-name-text" id="game-title-text">?</div>
+                    <div class="teensytext">ROMANIZATION</div>
+                        <div class="game-name-text" id="romanized-title">?</div>
+                    <div class="teensytext">SERIES</div>
+                        <div class="smallertext" id="series-name"><a>?</a></div>
+                    <div class="teensytext">SHARED MECHANICS</div>
+                        <div class="smallertext" id="shared-mechanics-list">?</div> 
+                    <div class="teensytext">AVG PLAY LENGTH</div>
+                    <div id="avg-play-length">?</div>
                 </div>
                 b
             </div>
+
             <div class="box is-full-card">
                 <div class="box is-info-box"><h2>General Summary</h2>Summary goes here</div>
             </div>
@@ -136,7 +140,7 @@
         },
 
         mounted() {
-
+            document.getElementById("addNewButton").setAttribute('href', URLs.NEWGAME);
         }
     }
 </script> 

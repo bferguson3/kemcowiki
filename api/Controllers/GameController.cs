@@ -1,9 +1,11 @@
 using api.Interfaces;
 using api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace api.Controllers
 {
+    [EnableCors("NativeOrigin")]
     [ApiController]
     [Route("api/[controller]")]
     public class GameController : ControllerBase
